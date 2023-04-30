@@ -1,8 +1,10 @@
-const cells = document.querySelectorAll(".cell");
-let cellIndex = "";
-let play = true;
+
+
 // module for game board
 const gameBoard = (() => {
+  let play = true;
+  const cells = document.querySelectorAll(".cell");
+  let cellIndex = "";
   let board = ['','','','','','','','',''];
   
   // render the board
@@ -61,6 +63,7 @@ const gameBoard = (() => {
         cellIndex = e.target.id;
         console.log(cellIndex);
         gameBoard.updateBoard(cellIndex,player);
+        gameBoard.render();
       }
       
       for (let cell of cells) {

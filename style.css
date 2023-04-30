@@ -17,8 +17,14 @@ body {
 }
 
 .cell {
-  border: 6px solid rgb(240, 240, 240);
+  border: 6px solid aliceblue;
   text-align: center;
-  padding-top: 45px;
-  font-size: 50px;
+  padding-top: 35px;
+  font-size: 80px;
+  font-family: Helvetica;
+  color:aliceblue;
+}
+
+.cell:hover{
+  background-color: rgb(110, 159, 150);
 }
