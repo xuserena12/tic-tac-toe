@@ -3,6 +3,8 @@
 // module for game board
 const gameBoard = (() => {
   let play = true;
+  let alternate = 0;
+  let winner = false;
   const cells = document.querySelectorAll(".cell");
   let cellIndex = "";
   let board = ['','','','','','','','',''];
@@ -26,7 +28,6 @@ const gameBoard = (() => {
     // returns true or false to determine if a round is over
   const checkRoundOver = () => {
     // winning combos
-    let winner = false;
     const winningArrays = [
       [0,1,2],
       [3,4,5],
@@ -43,9 +44,6 @@ const gameBoard = (() => {
         && board[combo[0]] === board[combo[2]]) {
         winner = true;
         console.log(winner);
-      } else {
-        winner = false;
-        console.log(winner);
       }
     })};
 
@@ -57,13 +55,37 @@ const gameBoard = (() => {
       }
     }
 
+    const gameOver = () => {
+      console.log("Game Over!");
+      // display message
+      gameBoard.reset();
+      winner = false;
+      player = 'X';
+      alternate = 0;
+
+      // we want to make the cells unclickable...
+    }
+
     let player = 'X';
     const startRound = () => {
       const cellPressed = e => {
         cellIndex = e.target.id;
         console.log(cellIndex);
+        if (alternate % 2 == 0) {
+          player = 'X';
+          alternate++;
+        } else {
+          player = 'O';
+          alternate++;
+        }
         gameBoard.updateBoard(cellIndex,player);
         gameBoard.render();
+        gameBoard.checkRoundOver();
+        if (winner == true) {
+          gameBoard.gameOver();
+        }
+        // make it unclickable after
+        // check to see if someone has won!
       }
       
       for (let cell of cells) {
@@ -74,7 +96,7 @@ const gameBoard = (() => {
     }
 
     return {
-      render, checkRoundOver, reset, getBoard, updateBoard, startRound,
+      render, checkRoundOver, reset, getBoard, updateBoard, startRound, gameOver,
     };
 })();
 
