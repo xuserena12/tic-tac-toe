@@ -1,0 +1,22 @@
+body {
+  background-color: aliceblue;
+}
+
+
+.gameboard-container {
+  display: flex;
+  justify-content: center;
+}
+
+.gameboard {
+  display: grid;
+  grid-template: repeat(3,1fr) / repeat(3,1fr);
+  height: 500px;
+  width: 500px;
+  background-color: rgb(44, 123, 109);
+}
+
+.cell {
+  align-items: center;
+  border: 6px solid rgb(240, 240, 240);
+}
