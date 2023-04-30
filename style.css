@@ -17,6 +17,8 @@ body {
 }
 
 .cell {
-  align-items: center;
   border: 6px solid rgb(240, 240, 240);
+  text-align: center;
+  padding-top: 45px;
+  font-size: 50px;
 }

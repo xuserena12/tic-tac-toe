@@ -1,9 +1,9 @@
+const cells = document.querySelectorAll(".cell");
+let cellIndex = "";
+let play = true;
 // module for game board
-
 const gameBoard = (() => {
   let board = ['','','','','','','','',''];
-  const cells = document.querySelectorAll(".cell");
-  const gameBoard = document.querySelector('#board');
   
   // render the board
   const render = () => {
@@ -16,14 +16,14 @@ const gameBoard = (() => {
     return board;
   };
 
-  // reset the game/board array
+  // reset the board array
   const reset = () => {
     board = ['','','','','','','','',''];
   };
 
     // returns true or false to determine if a round is over
   const checkRoundOver = () => {
-    // winning combos for arrays
+    // winning combos
     let winner = false;
     const winningArrays = [
       [0,1,2],
@@ -46,10 +46,33 @@ const gameBoard = (() => {
         console.log(winner);
       }
     })};
+
+    const updateBoard = (idx,move) => {
+      for (let j = 0; j < 9; j++) {
+        if (j == idx) {
+          board[j] = move;
+        }
+      }
+    }
+
+    let player = 'X';
+    const startRound = () => {
+      const cellPressed = e => {
+        cellIndex = e.target.id;
+        console.log(cellIndex);
+        gameBoard.updateBoard(cellIndex,player);
+      }
+      
+      for (let cell of cells) {
+        cell.addEventListener('click',cellPressed);
+      }
+      
+
+    }
+
     return {
-      render,cells,board,checkRoundOver,reset,getBoard
+      render, checkRoundOver, reset, getBoard, updateBoard, startRound,
     };
 })();
 
-
-
+gameBoard.startRound();
