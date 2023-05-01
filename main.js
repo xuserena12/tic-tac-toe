@@ -7,6 +7,7 @@ const gameBoard = (() => {
   let winner = false;
   const cells = document.querySelectorAll(".cell");
   let cellIndex = "";
+  const currentDisplay = document.getElementById('current-display')
   let board = ['','','','','','','','',''];
   
   // render the board
@@ -25,7 +26,14 @@ const gameBoard = (() => {
     board = ['','','','','','','','',''];
   };
 
-    // returns true or false to determine if a round is over
+  const checkBoardFull = () => {
+    for (let n = 0; n < 9; n++) {
+      if (board[n] == '') {
+        return false;
+      }
+    } return true;
+  }
+
   const checkRoundOver = () => {
     // winning combos
     const winningArrays = [
@@ -44,6 +52,8 @@ const gameBoard = (() => {
         && board[combo[0]] === board[combo[2]]) {
         winner = true;
         console.log(winner);
+      } else if (gameBoard.checkBoardFull()) {
+        winner = true;
       }
     })};
 
@@ -56,16 +66,21 @@ const gameBoard = (() => {
     }
 
     const gameOver = () => {
-      console.log("Game Over!");
-      // display message
+    let num = 0;
+     if (alternate % 2 == 0) {
+       num = 2;
+     } else {
+       num = 1;
+     }
       gameBoard.reset();
+      currentDisplay.innerHTML = `GAME OVER! Player ${num} wins`
       winner = false;
       player = 'X';
       alternate = 0;
 
       // we want to make the cells unclickable...
     }
-
+    currentDisplay.innerHTML = 'Player 1&#39;s turn!'
     let player = 'X';
     const startRound = () => {
       const cellPressed = e => {
@@ -74,18 +89,19 @@ const gameBoard = (() => {
         if (alternate % 2 == 0) {
           player = 'X';
           alternate++;
+          currentDisplay.innerHTML = 'Player 2&#39;s turn!'
         } else {
           player = 'O';
           alternate++;
+          currentDisplay.innerHTML = 'Player 1&#39;s turn!'
         }
         gameBoard.updateBoard(cellIndex,player);
         gameBoard.render();
         gameBoard.checkRoundOver();
-        if (winner == true) {
-          gameBoard.gameOver();
+        if (winner == true) {  // check to see if someone has won!
+          gameBoard.gameOver(); // end the game
         }
-        // make it unclickable after
-        // check to see if someone has won!
+       
       }
       
       for (let cell of cells) {
@@ -96,7 +112,7 @@ const gameBoard = (() => {
     }
 
     return {
-      render, checkRoundOver, reset, getBoard, updateBoard, startRound, gameOver,
+      render, checkRoundOver, reset, getBoard, updateBoard, startRound, gameOver, checkBoardFull,
     };
 })();
 
