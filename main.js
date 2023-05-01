@@ -54,6 +54,7 @@ const gameBoard = (() => {
         console.log(winner);
       } else if (gameBoard.checkBoardFull()) {
         winner = true;
+        alternate = 0; // means that there's a tie
       }
     })};
 
@@ -67,13 +68,16 @@ const gameBoard = (() => {
 
     const gameOver = () => {
     let num = 0;
-     if (alternate % 2 == 0) {
-       num = 2;
+     if (alternate == 0) {
+      num = 'It&#39;s a tie';
+     }
+     else if (alternate % 2 == 0) {
+       num = 'Player 2 wins';
      } else {
-       num = 1;
+       num = 'Player 1 wins';
      }
       gameBoard.reset();
-      currentDisplay.innerHTML = `GAME OVER! Player ${num} wins`
+      currentDisplay.innerHTML = `GAME OVER! ${num}`
       winner = false;
       player = 'X';
       alternate = 0;
