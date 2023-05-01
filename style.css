@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(249, 252, 210);
+  background-color: rgb(253, 255, 222);
 }
 
 
@@ -17,7 +17,7 @@ body {
 }
 
 .cell {
-  border: 6px solid rgb(249, 252, 210);
+  border: 6px solid rgb(253, 255, 222);
   text-align: center;
   padding-top: 35px;
   font-size: 80px;
@@ -35,7 +35,6 @@ body {
   font-family: Roboto Mono;
   font-weight: 700;
   font-size: 40px;
-  color: rgb(3, 3, 109);
   text-align: center;
 }
 

@@ -52,7 +52,13 @@ const gameBoard = (() => {
         && board[combo[0]] === board[combo[2]]) {
         winner = true;
         console.log(winner);
-      } else if (gameBoard.checkBoardFull()) {
+      } else if  (board[combo[0]]
+        && board[combo[0]] === board[combo[1]]
+        && board[combo[0]] === board[combo[2]] && gameBoard.checkBoardFull()) {
+        winner = true;
+        console.log(winner);
+        }
+      else if (gameBoard.checkBoardFull()) {
         winner = true;
         alternate = 0; // means that there's a tie
       }
@@ -67,17 +73,17 @@ const gameBoard = (() => {
     }
 
     const gameOver = () => {
-    let num = 0;
+    let phrase = '';
      if (alternate == 0) {
-      num = 'It&#39;s a tie';
+      phrase = 'It&#39;s a tie';
      }
      else if (alternate % 2 == 0) {
-       num = 'Player 2 wins';
+       phrase = 'Player 2 wins';
      } else {
-       num = 'Player 1 wins';
+       phrase = 'Player 1 wins';
      }
       gameBoard.reset();
-      currentDisplay.innerHTML = `GAME OVER! ${num}`
+      currentDisplay.innerHTML = `GAME OVER! ${phrase}`
       winner = false;
       player = 'X';
       alternate = 0;
