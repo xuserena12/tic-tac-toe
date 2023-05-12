@@ -88,10 +88,10 @@ const gameBoard = (() => {
       player = 'X';
       alternate = 0;
 
-      // we want to make the cells unclickable...
     }
     currentDisplay.innerHTML = 'Player 1&#39;s turn!'
     let player = 'X';
+    // start a round
     const startRound = () => {
       const cellPressed = e => {
         cellIndex = e.target.id;
